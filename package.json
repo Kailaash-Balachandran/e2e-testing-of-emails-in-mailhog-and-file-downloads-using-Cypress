@@ -1,0 +1,14 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Kailaash Balachandran",
+  "license": "ISC",
+  "dependencies": {
+    "nodemailer": "^6.4.16"
+  }
+}
