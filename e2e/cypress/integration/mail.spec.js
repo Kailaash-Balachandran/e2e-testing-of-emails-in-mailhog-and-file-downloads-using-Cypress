@@ -1,16 +1,15 @@
-/// <reference types="cypress" />
+context('User Onboarding Emails', () => {
+  it('Verification email is sent', () => {
+      cy.mhGetMailsBySubject('Your account is now confirmed')
+      .should('have.length', 1);
+  })
 
-context('Email', () => {
-    it('only one email', () => {
-        cy
-  .mhGetMailsBySubject('Email with Attachment')
-  .should('have.length', 1);
-    })
+  it('Email should contain username info', () => {
+    const mail = cy.mhGetMailsBySubject('Your account is now confirmed').mhFirst().mhGetBody();
+    mail.should('contain', 'Your username is');
+  })
 
-
-
-    it('Check', () => {
-
+  it('Email should contain two attachments', () => {
     cy.mhGetAllMails().then((mails) => {
         return mails.filter((mail) => {
             console.log('MAIL', mail);
@@ -18,5 +17,5 @@ context('Email', () => {
         });
       });
     })
-  })
+})
   

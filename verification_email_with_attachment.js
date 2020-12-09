@@ -2,7 +2,7 @@ const mailer = require('nodemailer');
 const fs = require('fs');
 
 const smtp = mailer.createTransport({
-  host: '127.0.0.1',
+  host: 'localhost',
   port: '1025',
   auth: {
     user: 'user',
@@ -11,10 +11,9 @@ const smtp = mailer.createTransport({
 });
 
 const mailOptions = {
-  from: 'hoge@github.com',
-  to: 'hogehoge@github.com',
-  subject: 'Email with Attachment',
-  html: 'Email with Attachment',
+  from: 'noreply@test.com',
+  to: 'johndoe@test.com',
+  subject: 'Email sent with attachments',
   attachments: [
     {
       filename: 'text1.txt',

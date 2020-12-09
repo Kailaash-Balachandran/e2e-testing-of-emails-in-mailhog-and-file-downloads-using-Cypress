@@ -1,7 +1,7 @@
 const mailer = require('nodemailer');
 
 const smtp = mailer.createTransport({
-  host: '127.0.0.1',
+  host: 'localhost',
   port: '1025',
   auth: {
     user: 'user',
@@ -10,10 +10,10 @@ const smtp = mailer.createTransport({
 });
 
 const mailOptions = {
-  from: 'hoge@github.com',
-  to: 'hogehoge@github.com',
-  subject: 'タイトルです',
-  html: 'メール本文です',
+  from: 'noreply@test.com',
+  to: 'johndoe@test.com',
+  subject: 'Your account is now confirmed',
+  html: '<h1>Thanks for the verification</h1><p>Your username is: johndoe</p>'
 };
 
 smtp.sendMail(mailOptions, function(err, info) {
