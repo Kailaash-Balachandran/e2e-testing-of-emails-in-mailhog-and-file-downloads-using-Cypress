@@ -1,8 +1,7 @@
 const mailer = require('nodemailer');
-const fs = require('fs');
 
 const smtp = mailer.createTransport({
-  host: 'localhost',
+  host: '0.0.0.0',
   port: '1025',
   auth: {
     user: 'user',
@@ -13,18 +12,8 @@ const smtp = mailer.createTransport({
 const mailOptions = {
   from: 'noreply@test.com',
   to: 'johndoe@test.com',
-  subject: 'Email sent with attachments',
-  attachments: [
-    {
-      filename: 'text1.txt',
-      content: 'hello world!',
-      contentType: 'text/plain'
-    },
-    {
-      filename: 'image.jpeg',
-      content: fs.createReadStream('./files/image.jpeg')
-    }
-  ]
+  subject: 'Your account is now confirmed',
+  html: '<h1>Thanks for the verification</h1><p>Your username is: johndoe</p>'
 };
 
 smtp.sendMail(mailOptions, function(err, info) {

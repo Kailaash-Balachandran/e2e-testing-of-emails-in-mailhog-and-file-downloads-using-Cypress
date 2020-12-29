@@ -9,13 +9,17 @@ context('User Onboarding Emails', () => {
     mail.should('contain', 'Your username is');
   })
 
-  it('Email should contain two attachments', () => {
-    cy.mhGetAllMails().then((mails) => {
-        return mails.filter((mail) => {
-            console.log('MAIL', mail);
-            return mail.Content.Headers.Subject[0] === 'Email with Attachment'
-        });
-      });
-    })
+  it('Email should contain an image attachment', () => {
+    const attachmentContentType = 'image/jpeg; name=unsplash.jpg';
+    cy.mhGetMailsBySubject('Email sent with an image attachment').mhFirst().then(mail => {
+      const imageAttachment = mail.MIME.Parts.filter(mime => {
+        const contentType = mime.Headers['Content-Type'] || null;
+        if (contentType) {
+          return contentType.includes(attachmentContentType);
+        }
+      })
+      expect(imageAttachment).to.have.lengthOf(1)
+    });
+  })
 })
   
